@@ -47,11 +47,31 @@ func (ac *ACA) Insert(str string) {
 func (ac *ACA) PrintTree() {
 	r := ac.root
 	fmt.Printf("r->")
-	for {
-		for i := 0; i < CAPS; i++ {
-			if r.next[i] != nil {
-				fmt.Printf("%d", i)
+	recursiveTree(r)
+}
+
+func getString(index int) string {
+	base := []byte("a")
+	target := base[0] + byte(index)
+	var str []byte
+	str = append(str, target)
+	return string(str)
+}
+func recursiveTree(current *Node) {
+	for i := 0; i < CAPS; i++ {
+		if current.next[i] != nil {
+			fmt.Printf("%s->", getString(i))
+			temp := current
+			current = current.next[i]
+			recursiveTree(current)
+			current = temp
+			for j := 0; j <= current.count; j++ {
+				fmt.Printf("     ")
 			}
 		}
+	}
+	//tail node
+	if current.count == 0 {
+		fmt.Printf("null \n")
 	}
 }
