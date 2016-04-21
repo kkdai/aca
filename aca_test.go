@@ -26,5 +26,6 @@ func TestInsert(t *testing.T) {
 	ac.Insert("said")
 	ac.Insert("shield")
 	ac.Insert("shell")
+	ac.buildAC()
 	ac.PrintTree()
 }

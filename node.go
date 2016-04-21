@@ -19,15 +19,18 @@
 package aca
 
 const (
+	//CAPS :It is all caps count from a,b,...z
 	CAPS int = 26
 )
 
+//Node :Basic structure of AC Automation
 type Node struct {
-	count int
-	fail  *Node
-	next  [CAPS]*Node
+	end  bool
+	fail *Node
+	next [CAPS]*Node
 }
 
+//NewNode :Node constructor
 func NewNode() *Node {
 	n := new(Node)
 	return n

@@ -32,6 +32,9 @@ type ACA struct {
 	root *Node
 	head int
 	tail int
+
+	nodeList  [5000]*Node // For failed function constructor
+	lineBreak bool
 }
 
 //Insert :Insert a new string into ACA
@@ -42,23 +45,70 @@ func (ac *ACA) Insert(str string) {
 		index := getIndex(str[i])
 		if p.next[index] == nil {
 			p.next[index] = NewNode()
-			p.count++
 		}
 		p = p.next[index]
 	}
+	p.end = true
 }
 
 //PrintTree :Print a tree
 func (ac *ACA) PrintTree() {
 	r := ac.root
 	fmt.Printf("r->")
-	recursiveTree(r, 0)
+	ac.recursiveTree(r, 0)
+}
+
+func (ac *ACA) buildAC() {
+	r := ac.root
+	r.fail = nil
+	ac.nodeList[ac.head] = r
+	ac.head++
+
+	for {
+		if ac.head == ac.tail {
+			break
+		}
+
+		temp := ac.nodeList[ac.tail]
+		ac.tail++
+		var p *Node
+
+		for i := 0; i < CAPS; i++ {
+			if temp.next[i] != nil {
+				if temp == ac.root {
+					temp.next[i].fail = ac.root
+				} else {
+					p = temp.fail
+					for {
+						if p == nil {
+							break
+						}
+
+						if p.next[i] != nil {
+							temp.next[i].fail = p.next[i]
+							break
+						}
+						p = p.fail
+					}
+
+					if p == nil {
+						temp.next[i].fail = r
+					}
+				}
+
+				ac.nodeList[ac.head] = temp.next[i]
+				ac.head++
+			}
+		}
+
+	}
 }
 
 func getIndex(char byte) int {
 	base := []byte("a")
 	return int(char - base[0])
 }
+
 func getString(index int) string {
 	base := []byte("a")
 	target := base[0] + byte(index)
@@ -66,23 +116,29 @@ func getString(index int) string {
 	str = append(str, target)
 	return string(str)
 }
-func recursiveTree(current *Node, depth int) {
+
+func (ac *ACA) recursiveTree(current *Node, depth int) {
 	for i := 0; i < CAPS; i++ {
 		if current.next[i] != nil {
+			if ac.lineBreak == true {
+				for j := 0; j < depth; j++ {
+					fmt.Printf("   ")
+				}
+				ac.lineBreak = false
+			}
+
 			fmt.Printf("%s->", getString(i))
 			temp := current
 			current = current.next[i]
 			depth++
-			recursiveTree(current, depth)
+			ac.recursiveTree(current, depth)
 			current = temp
-			fmt.Printf("(%d)\n", depth)
-			for j := 0; j <= depth; j++ {
-				fmt.Printf("    ")
-			}
+			ac.lineBreak = true
 		}
 	}
+
 	//tail node
-	if current.count == 0 {
-		fmt.Printf("\tnull\n")
+	if current.end == true {
+		fmt.Printf("null\n")
 	}
 }
