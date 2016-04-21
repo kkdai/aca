@@ -18,14 +18,20 @@
 
 package aca
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestInsert(t *testing.T) {
 	ac := NewACA()
 	ac.Insert("say")
-	ac.Insert("said")
-	ac.Insert("shield")
+	ac.Insert("she")
 	ac.Insert("shell")
-	ac.buildAC()
+	ac.Insert("shr")
+	ac.Insert("her")
+	ac.BuildAC()
+	fmt.Println(ac.stringList)
+	fmt.Println("find string:", ac.Query("aaasheaaa"))
 	ac.PrintTree()
 }

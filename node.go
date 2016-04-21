@@ -25,13 +25,15 @@ const (
 
 //Node :Basic structure of AC Automation
 type Node struct {
-	end  bool
-	fail *Node
-	next [CAPS]*Node
+	strNo int
+	fail  *Node
+	next  [CAPS]*Node
+	id    int //zero-based number of node id
 }
 
 //NewNode :Node constructor
-func NewNode() *Node {
+func NewNode(id int) *Node {
 	n := new(Node)
+	n.id = id
 	return n
 }

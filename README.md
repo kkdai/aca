@@ -1,10 +1,11 @@
-AC Automation
+ACA: Aho–Corasick Automation
 ==================
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kkdai/trigram/master/LICENSE)  [![GoDoc](https://godoc.org/github.com/kkdai/ac-automation?status.svg)](https://godoc.org/github.com/kkdai/ac-automation)  [![Build Status](https://travis-ci.org/kkdai/ac-automation.svg?branch=master)](https://travis-ci.org/kkdai/ac-automation)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kkdai/aca/master/LICENSE)  [![GoDoc](https://godoc.org/github.com/kkdai/aca?status.svg)](https://godoc.org/github.com/kkdai/aca)  [![Build Status](https://travis-ci.org/kkdai/aca.svg?branch=master)](https://travis-ci.org/kkdai/aca)
 
 
-
+Aho–Corasick algorithm: 
+ 
  
 Install
 ---------------
@@ -21,6 +22,9 @@ Usage
 Inspired
 ---------------
 
+- [跳跃表，字典树（单词查找树，Trie树），后缀树，KMP算法，AC 自动机相关算法原理详细汇总](http://blog.csdn.net/zhongwen7710/article/details/39274349)
+- [Biosequence Algorithms, Spring 2005 Lecture 4: Set Matching and Aho-Corasick Algorithm](http://www.cs.uku.fi/~kilpelai/BSA05/lectures/slides04.pdf)
+- [Wiki: Aho–Corasick algorithm](https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm)
 
 Project52
 ---------------
