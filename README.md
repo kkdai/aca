@@ -10,6 +10,9 @@ In computer science, the Aho–Corasick algorithm is a string searching algorith
 
 (from [Wiki](https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm))
 
+## Explanation in Chinese
+
+Check [this blog](http://www.evanlin.com/about-aca/) for more detail explanation, but it is Chinese
  
 Install
 ---------------
