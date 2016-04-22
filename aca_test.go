@@ -16,12 +16,19 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-package aca
+package aca_test
 
 import (
 	"fmt"
 	"testing"
+
+	. "github.com/kkdai/aca"
 )
+
+func TestEmpty(t *testing.T) {
+	ac := NewACA()
+	ac.BuildAC()
+}
 
 func TestInsert(t *testing.T) {
 	ac := NewACA()
@@ -31,7 +38,9 @@ func TestInsert(t *testing.T) {
 	ac.Insert("shr")
 	ac.Insert("her")
 	ac.BuildAC()
-	fmt.Println(ac.stringList)
-	fmt.Println("find string:", ac.Query("aaashellaashrmmmmmhemmhera"))
-	ac.PrintTree()
+	ret := ac.Query("aaashellaashrmmmmmhemmhera")
+	if len(ret) != 4 {
+		t.Error("Query error")
+	}
+	fmt.Println("find string:", ret)
 }

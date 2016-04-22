@@ -23,6 +23,11 @@ import (
 	"strings"
 )
 
+const (
+	//MaxNodeNumber maximum node quota
+	MaxNodeNumber int = 5000
+)
+
 //NewACA :Constructor
 func NewACA() *ACA {
 	ac := new(ACA)
@@ -34,13 +39,12 @@ func NewACA() *ACA {
 //ACA A-C Automation
 type ACA struct {
 	root        *Node
-	head        int
 	tail        int
 	nodeCount   int
 	stringCount int
 	stringList  []string
 
-	nodeList  [5000]*Node // For failed function constructor
+	nodeList  [MaxNodeNumber]*Node // For failed function constructor
 	lineBreak bool
 }
 
@@ -72,13 +76,14 @@ func (ac *ACA) PrintTree() {
 
 //BuildAC :Build this AC Automation failed function according to current tree
 func (ac *ACA) BuildAC() {
+	head := 0
 	r := ac.root
 	r.fail = nil
-	ac.nodeList[ac.head] = r
-	ac.head++
+	ac.nodeList[head] = r
+	head++
 
 	for {
-		if ac.head == ac.tail {
+		if head == ac.tail {
 			break
 		}
 
@@ -112,8 +117,8 @@ func (ac *ACA) BuildAC() {
 					}
 				}
 
-				ac.nodeList[ac.head] = temp.next[i]
-				ac.head++
+				ac.nodeList[head] = temp.next[i]
+				head++
 			}
 		}
 
@@ -151,11 +156,10 @@ func (ac *ACA) Query(haystack string) []string {
 			if temp == ac.root || temp.strNo == 0 {
 				break
 			}
-			// cnt = cnt + temp.strNo
 			if temp.strNo > 0 {
 				//strNo is 1-base, but index is zero-based
 				stringIndex := temp.strNo - 1
-				fmt.Println("Found string:", ac.stringList[stringIndex], " in i=", i)
+				// fmt.Println("Found string:", ac.stringList[stringIndex], " in i=", i)
 				retSlice = append(retSlice, ac.stringList[stringIndex])
 			}
 			temp = temp.fail
