@@ -32,6 +32,6 @@ func TestInsert(t *testing.T) {
 	ac.Insert("her")
 	ac.BuildAC()
 	fmt.Println(ac.stringList)
-	fmt.Println("find string:", ac.Query("aaasheaaa"))
+	fmt.Println("find string:", ac.Query("aaashellaashrmmmmmhemmhera"))
 	ac.PrintTree()
 }
